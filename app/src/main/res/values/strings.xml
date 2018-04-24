@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ReactGit</string>
+
+
+    <string name="menu_search">Search</string>
+    <string name="menu_favourite">Favourite</string>
+</resources>

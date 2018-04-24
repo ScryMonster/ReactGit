@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:title="@string/menu_search"
+        android:id="@+id/search_item"
+        android:orderInCategory="2"
+        app:showAsAction="always"
+        android:icon="@drawable/action_search"/>
+
+    <item
+        android:title="@string/menu_favourite"
+        android:id="@+id/favourite_item"
+        android:orderInCategory="1"
+        app:showAsAction="always"
+        android:icon="@drawable/action_favourite"/>
+
+
+</menu>

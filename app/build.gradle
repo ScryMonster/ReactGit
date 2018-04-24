@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply from: '../dependencies.gradle'
+
+
+android {
+    compileSdkVersion versions.compileSdkVersion
+    buildToolsVersion versions.buildToolsVersion
+    defaultConfig {
+        applicationId "com.example.fox.reactgit"
+        minSdkVersion versions.minSdkVersion
+        targetSdkVersion versions.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+
+        all{
+            buildConfigField 'String', 'SHARED_PREF_KEY', '\"APP_PREF\"'
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+
+    //sup libs
+    implementation libs.supportDesign
+    implementation libs.constraintLayout
+
+    //Kotlin
+    implementation libs.kotlin
+    //Rx
+    implementation libs.rxJava
+    implementation libs.rxAndroid
+    implementation libs.rxBinding
+
+    //Dagger2
+    implementation libs.dagger
+    kapt libs.daggerCompiler
+
+    //Room
+    implementation libs.room
+    implementation libs.roomRx
+    kapt libs.roomAnnotation
+    testImplementation libs.roomTest
+
+    //Glide
+    implementation libs.glide
+    kapt libs.glideCompiler
+
+
+    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.victor:lib:1.0.4'
+    implementation libs.gson
+
+
+    //testing
+    testImplementation libs.junit
+    testImplementation libs.mockitoCore
+    testImplementation libs.espresso
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+}
+
+androidExtensions {
+    experimental = true
+}
+
+kapt {
+    generateStubs = true
+}
+
+repositories {
+    mavenCentral()
+}
+
