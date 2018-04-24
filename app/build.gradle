@@ -40,6 +40,7 @@ dependencies {
     //sup libs
     implementation libs.supportDesign
     implementation libs.constraintLayout
+    implementation libs.card
 
     //Kotlin
     implementation libs.kotlin
