@@ -10,6 +10,7 @@ import dagger.Component
 interface AppComponent {
 
     fun addSearchActivityComponent() : SearchActivityComponent.Builder
+    fun addSearchFragmentComponent() : SearchFragmentComponent.Builder
 
 
 

@@ -24,6 +24,7 @@ android {
 
         all{
             buildConfigField 'String', 'SHARED_PREF_KEY', '\"APP_PREF\"'
+            buildConfigField 'String', 'GITHUB_API_BASE_URL', '\"https://api.github.com/\"'
         }
 
         release {
@@ -63,6 +64,12 @@ dependencies {
     implementation libs.glide
     kapt libs.glideCompiler
 
+    //Retrofit
+    implementation libs.retrofit
+    implementation libs.retrofitRX
+    implementation libs.retrofitGson
+    implementation libs.retrofitInterceptor
+
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.victor:lib:1.0.4'
@@ -73,7 +80,6 @@ dependencies {
     testImplementation libs.junit
     testImplementation libs.mockitoCore
     testImplementation libs.espresso
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
 }
 
 androidExtensions {

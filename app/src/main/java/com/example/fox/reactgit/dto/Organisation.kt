@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Organisation(@SerializedName("login") private val login: String,
-                        @SerializedName("id")  private val id: String,
-                        @SerializedName("avatar_url") private val avatarUrl: String,
-                        @SerializedName("url") private val url: String,
-                        @SerializedName("repos_url") private val reposUrl: String,
-                        @SerializedName("score") private val score: String) : Parcelable
+data class Organisation(@SerializedName("login") val login: String,
+                        @SerializedName("id")   val id: String,
+                        @SerializedName("avatar_url")  val avatarUrl: String,
+                        @SerializedName("url")  val url: String,
+                        @SerializedName("repos_url")  val reposUrl: String,
+                        @SerializedName("score")  val score: String) : Parcelable

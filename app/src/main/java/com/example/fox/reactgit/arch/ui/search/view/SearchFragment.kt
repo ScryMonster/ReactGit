@@ -1,9 +1,17 @@
 package com.example.fox.reactgit.arch.ui.search.view
 
 import com.example.fox.reactgit.R
+import com.example.fox.reactgit.arch.adapters.SearchRvAdapter
 import com.example.fox.reactgit.arch.ui.base.BaseFragment
+import com.example.fox.reactgit.arch.ui.search.presenter.SearchPresenter
+import javax.inject.Inject
 
-class SearchFragment : BaseFragment(),ISearchView {
+class SearchFragment @Inject constructor() : BaseFragment(),ISearchView {
+
+    @Inject lateinit var presenter:SearchPresenter
+    @Inject lateinit var adapter:SearchRvAdapter
+
+
     override fun setView() = R.layout.fragment_search
 
     override fun buildGraph() {
