@@ -22,7 +22,7 @@ android {
     }
     buildTypes {
 
-        all{
+        all {
             buildConfigField 'String', 'SHARED_PREF_KEY', '\"APP_PREF\"'
             buildConfigField 'String', 'GITHUB_API_BASE_URL', '\"https://api.github.com/\"'
         }
@@ -36,7 +36,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     //sup libs
     implementation libs.supportDesign
@@ -52,6 +52,7 @@ dependencies {
 
     //Dagger2
     implementation libs.dagger
+    implementation 'com.android.support.constraint:constraint-layout:1.1.0'
     kapt libs.daggerCompiler
 
     //Room
@@ -75,7 +76,6 @@ dependencies {
     implementation 'com.victor:lib:1.0.4'
     implementation libs.gson
 
-
     //testing
     testImplementation libs.junit
     testImplementation libs.mockitoCore
@@ -93,4 +93,3 @@ kapt {
 repositories {
     mavenCentral()
 }
-

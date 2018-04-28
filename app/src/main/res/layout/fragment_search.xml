@@ -8,19 +8,20 @@
     <EditText
         android:id="@+id/git_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="20dp"
+        android:textSize="15sp"
         android:layout_marginTop="8dp"
         android:lines="1"
+        tools:text="FFFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/git_rv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/git_rv"
         android:layout_width="match_parent"
-        android:layout_height="450dp"
+        android:layout_height="604dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

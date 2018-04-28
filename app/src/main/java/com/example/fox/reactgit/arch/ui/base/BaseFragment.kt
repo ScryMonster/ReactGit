@@ -9,15 +9,16 @@ import com.example.fox.reactgit.R
 import com.example.fox.reactgit.application.ReactGit
 import com.example.fox.reactgit.utils.inflate
 import com.example.fox.reactgit.utils.showInSnackBarIn
+import com.example.fox.reactgit.utils.showInSnackBarInError
 import com.victor.loading.rotate.RotateLoading
 
 abstract class BaseFragment : Fragment(),IBaseView{
 
-    protected val component by lazy {
+    protected val manager by lazy {
         (activity?.application as ReactGit).manager
     }
     private lateinit var progress: RotateLoading
-    private var saved = false
+    protected var saved = false
 
 
     abstract fun setView(): Int
@@ -57,5 +58,9 @@ abstract class BaseFragment : Fragment(),IBaseView{
 
     override fun infoMessage(message: String) {
         message.showInSnackBarIn(view!!)
+    }
+
+    override fun errorMessage(message: String) {
+        message.showInSnackBarInError(view!!)
     }
 }

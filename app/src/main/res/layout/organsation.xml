@@ -1,54 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="175dp"
-    android:layout_height="175dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:id="@+id/card"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:elevation="8dp"
+    app:cardCornerRadius="3dp">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card"
+
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:elevation="8dp"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="3dp">
+        android:layout_height="match_parent">
 
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <ImageView
-                android:id="@+id/organisation_img"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.489"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.163" />
+        <ImageView
+            android:id="@+id/organisation_img"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.056"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-            <TextView
-                android:id="@+id/organisation_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/organisation_img"
-                tools:text="Facebook" />
+        <TextView
+            android:id="@+id/organisation_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.03"
+            app:layout_constraintStart_toEndOf="@+id/organisation_img"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Facebook" />
 
-        </android.support.constraint.ConstraintLayout>
-    </android.support.v7.widget.CardView>
+        <TextView
+            android:id="@+id/organisation_info"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toBottomOf="@+id/organisation_name"
+            tools:text="105.6" />
 
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Score:"
+            app:layout_constraintStart_toEndOf="@+id/organisation_img"
+            tools:layout_editor_absoluteY="55dp" />
+
+        <TextView
+            android:id="@+id/organisation_url"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.033"
+            app:layout_constraintStart_toEndOf="@+id/organisation_img"
+            app:layout_constraintTop_toBottomOf="@+id/organisation_info"
+            tools:text="Url" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0"
+            tools:layout_editor_absoluteX="0dp" />
+
+    </android.support.constraint.ConstraintLayout>
+
+
+
+</android.support.v7.widget.CardView>

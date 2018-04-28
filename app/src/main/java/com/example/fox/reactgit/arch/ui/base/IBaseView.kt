@@ -7,4 +7,5 @@ interface IBaseView {
     fun buildGraph()
     fun destroyGraph()
     fun infoMessage(message:String)
+    fun errorMessage(message:String)
 }
