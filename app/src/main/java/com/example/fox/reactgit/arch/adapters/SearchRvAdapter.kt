@@ -10,7 +10,7 @@ import com.example.fox.reactgit.di.scopes.SearchScope as Search
 import com.example.fox.reactgit.dto.User
 import com.example.fox.reactgit.utils.inflate
 import com.example.fox.reactgit.utils.loadUrl
-import kotlinx.android.synthetic.main.organsation.view.*
+import kotlinx.android.synthetic.main.git_user.view.*
 import javax.inject.Inject
 
 @Search
@@ -20,7 +20,7 @@ class SearchRvAdapter @Inject constructor()
     private lateinit var clickListener : OnItemClickListener<User>
     private var list :List<User> = mutableListOf()
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = GithubUserViewHolder(parent?.inflate(R.layout.organsation)!!)
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int) = GithubUserViewHolder(parent?.inflate(R.layout.git_user)!!)
 
     override fun getItemCount() = list.size
 

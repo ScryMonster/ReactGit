@@ -18,7 +18,7 @@ class SearchInteractor @Inject constructor(private val repository:GithubReposito
 
 
     override fun validateField(name: InitialValueObservable<CharSequence>): Observable<String>  = name.debounce(2,TimeUnit.SECONDS)
-            .filter { it.length < 2 }
+            .filter { it.length > 2 }
             .map { it.toString() }
 
 

@@ -5,8 +5,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".arch.ui.search.SearchActivity"
-    android:background="@color/colorCyanDark">
+    tools:context=".arch.ui.search.SearchActivity">
 
     <FrameLayout
         android:id="@+id/container"
