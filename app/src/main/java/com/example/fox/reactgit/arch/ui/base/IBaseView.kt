@@ -8,4 +8,5 @@ interface IBaseView {
     fun destroyGraph()
     fun infoMessage(message:String)
     fun errorMessage(message:String)
+    fun makeBackgroundVisibleWhileProgrees(flag:Boolean)
 }

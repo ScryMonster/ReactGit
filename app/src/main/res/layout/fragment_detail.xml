@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/repositories_rv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</FrameLayout>
+    <com.victor.loading.rotate.RotateLoading
+        android:id="@+id/rotateLoading"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:loading_color="@color/colorPrimary"
+        app:loading_width="5dp" />
+
+</android.support.constraint.ConstraintLayout>

@@ -12,6 +12,7 @@ interface AppComponent {
 
     fun addSearchActivityComponent() : SearchActivityComponent.Builder
     fun addSearchFragmentComponent() : SearchFragmentComponent.Builder
+    fun addDetailComponent() : Detailcomponent.Builder
 
 
 

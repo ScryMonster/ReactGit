@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import com.example.fox.reactgit.R
 import com.example.fox.reactgit.application.ReactGit
 import com.example.fox.reactgit.utils.inflate
@@ -19,6 +20,7 @@ abstract class BaseFragment : Fragment(),IBaseView{
     }
     private lateinit var progress: RotateLoading
     protected var saved = false
+
 
 
     abstract fun setView(): Int
@@ -37,6 +39,21 @@ abstract class BaseFragment : Fragment(),IBaseView{
         progress = view?.findViewById(R.id.rotateLoading)!!
         return view
     }
+
+    override fun makeBackgroundVisibleWhileProgrees(flag: Boolean) {
+        fun switchOffInteractionWithUi() {
+            activity?.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+                    WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+        }
+        fun switchOnInteractionWWithUI(){
+            activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        }
+
+        if (flag) switchOnInteractionWWithUI()
+        else switchOffInteractionWithUi()
+    }
+
+
 
     override fun onDestroy() {
         super.onDestroy()

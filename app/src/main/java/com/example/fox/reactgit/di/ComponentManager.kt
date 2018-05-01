@@ -1,10 +1,7 @@
 package com.example.fox.reactgit.di
 
 import android.content.Context
-import com.example.fox.reactgit.di.components.AppComponent
-import com.example.fox.reactgit.di.components.DaggerAppComponent
-import com.example.fox.reactgit.di.components.SearchActivityComponent
-import com.example.fox.reactgit.di.components.SearchFragmentComponent
+import com.example.fox.reactgit.di.components.*
 import com.example.fox.reactgit.di.modules.ApplicationModule
 
 class ComponentManager(private val context: Context) {
@@ -12,6 +9,7 @@ class ComponentManager(private val context: Context) {
     private var appComponent: AppComponent? = null
     private var searchActComponent: SearchActivityComponent? = null
     private var searchFragmentComponent: SearchFragmentComponent? = null
+    private var detailcomponent: Detailcomponent? = null
 
 
     fun addAppComponent(): AppComponent {
@@ -51,5 +49,18 @@ class ComponentManager(private val context: Context) {
 
     fun removeSearchhFragmentComponent(){
         searchFragmentComponent = null
+    }
+
+    fun addDetailComponent() : Detailcomponent{
+        if (detailcomponent == null){
+            detailcomponent = appComponent!!
+                    .addDetailComponent()
+                    .build()
+        }
+        return detailcomponent!!
+    }
+
+    fun removeDetailComponent(){
+        detailcomponent = null
     }
 }

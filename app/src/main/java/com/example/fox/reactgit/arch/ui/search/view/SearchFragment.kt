@@ -3,7 +3,9 @@ package com.example.fox.reactgit.arch.ui.search.view
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import com.example.fox.reactgit.R
 import com.example.fox.reactgit.arch.adapters.SearchRvAdapter
 import com.example.fox.reactgit.arch.ui.base.BaseFragment
@@ -26,8 +28,6 @@ class SearchFragment @Inject constructor() : BaseFragment(),ISearchView {
     @Inject lateinit var adapter:SearchRvAdapter
 
 
-    private val numberOfCols = 3
-
     override fun setView() = R.layout.fragment_search
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,6 +39,11 @@ class SearchFragment @Inject constructor() : BaseFragment(),ISearchView {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.detach()
+    }
+
     override fun buildGraph() {
         manager.addSearcFragmentComponent().inject(this)
     }
@@ -47,9 +52,8 @@ class SearchFragment @Inject constructor() : BaseFragment(),ISearchView {
         manager.removeSearchhFragmentComponent()
     }
 
-    override fun init() {
+    override fun init() {}
 
-    }
 
     override fun startSearching(searchTerms: String) {
         presenter.searchGitUser(searchTerms)

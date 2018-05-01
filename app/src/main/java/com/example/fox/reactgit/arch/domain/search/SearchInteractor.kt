@@ -5,6 +5,7 @@ import com.example.fox.reactgit.arch.repositories.GithubRepository
 import com.example.fox.reactgit.di.scopes.SearchScope
 import com.example.fox.reactgit.dto.Repository
 import com.example.fox.reactgit.dto.User
+import com.example.fox.reactgit.dto.UserResponse
 import com.jakewharton.rxbinding2.InitialValueObservable
 import io.reactivex.Observable
 import io.reactivex.Single
@@ -14,10 +15,10 @@ import javax.inject.Inject
 @SearchScope
 class SearchInteractor @Inject constructor(private val repository:GithubRepository) : ISearchInteractor {
 
-    override fun searchGitUser(name: String): Single<List<User>>  = repository.searchGitUser(name)
+    override fun searchGitUser(name: String): Single<UserResponse>  = repository.searchGitUser(name)
 
 
-    override fun validateField(name: InitialValueObservable<CharSequence>): Observable<String>  = name.debounce(2,TimeUnit.SECONDS)
+    override fun validateField(name: InitialValueObservable<CharSequence>): Observable<String>  = name.debounce(800,TimeUnit.MILLISECONDS)
             .filter { it.length > 2 }
             .map { it.toString() }
 

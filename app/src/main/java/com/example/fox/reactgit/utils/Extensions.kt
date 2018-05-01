@@ -18,9 +18,10 @@ fun FragmentManager.addFragment(fragment: Fragment, place: Int, fragmentName: St
             .commit()
 }
 
-fun FragmentManager.replaceFragment(fragment: Fragment, place: Int) {
+fun FragmentManager.replaceFragment(fragment: Fragment, place: Int,fragmentName:String? = null) {
     this.beginTransaction()
             .replace(place, fragment)
+            .addToBackStack(fragmentName)
             .commit()
 }
 

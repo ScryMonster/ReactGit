@@ -19,8 +19,9 @@ class SearchPresenter @Inject constructor(private val interactor: SearchInteract
         interactor.searchGitUser(name)
                 .applySchedulers()
                 .showProgress(getMvpView()!!)
-                .subscribe({ list ->
-                    getMvpView()?.setList(list)
+                .subscribe({ response ->
+                    val items = response?.items
+                    getMvpView()?.setList(items!!)
                 }, { error ->
                     getMvpView()?.errorMessage(error.localizedMessage)
                 })

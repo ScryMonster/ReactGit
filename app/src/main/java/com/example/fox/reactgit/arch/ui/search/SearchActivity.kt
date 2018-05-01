@@ -27,6 +27,7 @@ class SearchActivity : AppCompatActivity(), ISearchActView {
         (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
     }
 
+
     @Inject
     lateinit var presenter: SearchActivityPresenter
 
@@ -61,7 +62,7 @@ class SearchActivity : AppCompatActivity(), ISearchActView {
     override fun innerFragmentNavigation(key:String,list:List<Repository>) {
         when(key){
             DETAIL_FRAGMENT -> {
-                supportFragmentManager.replaceFragment(DetailFragment.newInstance(list as ArrayList<Repository>),R.id.container)
+                supportFragmentManager.replaceFragment(DetailFragment.newInstance(list as ArrayList<Repository>),R.id.container,DETAIL_FRAGMENT)
             }
         }
     }
@@ -69,6 +70,8 @@ class SearchActivity : AppCompatActivity(), ISearchActView {
     override fun showProgress(tag: Any?) {}
 
     override fun hideProgress(tag: Any?) {}
+
+    override fun makeBackgroundVisibleWhileProgrees(flag: Boolean) {}
 
     override fun buildGraph() {
         (application as ReactGit).manager.addSearchActComponent().inject(this)

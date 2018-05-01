@@ -19,6 +19,12 @@ fun <T> Single<T>.applySchedulers() =
 fun <T> Observable<T>.applySchedulers() =
         observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
 
-fun<T> Single<T>.showProgress(view: IBaseView) = this
-        .doOnSubscribe { view.showProgress(null) }
-        .doFinally { view.hideProgress(null) }!!
+fun <T> Single<T>.showProgress(view: IBaseView) = this
+        .doOnSubscribe {
+            view.showProgress(null)
+            view.makeBackgroundVisibleWhileProgrees(false)
+        }
+        .doFinally {
+            view.hideProgress(null)
+            view.makeBackgroundVisibleWhileProgrees(true)
+        }!!
