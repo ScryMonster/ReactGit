@@ -7,8 +7,9 @@ abstract class BaseRVAdapter<T,VH:BaseRecyclerViewHolder<T>>  : RecyclerView.Ada
     protected val list = arrayListOf<T>()
     protected lateinit var click:OnItemClickListener<T>
 
-    fun setList(list:List<T>){
+    fun setList(list:List<T>,notify:Boolean = false){
         this.list.addAll(list)
+        if (notify) notifyDataSetChanged()
     }
 
 

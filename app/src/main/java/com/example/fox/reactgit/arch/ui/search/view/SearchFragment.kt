@@ -10,6 +10,7 @@ import com.example.fox.reactgit.R
 import com.example.fox.reactgit.arch.adapters.SearchRvAdapter
 import com.example.fox.reactgit.arch.ui.base.BaseFragment
 import com.example.fox.reactgit.arch.ui.base.rv.OnItemClickListener
+import com.example.fox.reactgit.arch.ui.base.rv.OnItemLikedListener
 import com.example.fox.reactgit.arch.ui.search.SearchActivity
 import com.example.fox.reactgit.arch.ui.search.presenter.SearchPresenter
 import com.example.fox.reactgit.di.components.SearchActivityComponent
@@ -19,7 +20,10 @@ import com.example.fox.reactgit.utils.Constants
 import com.example.fox.reactgit.utils.Constants.FragmentNames.DETAIL_FRAGMENT
 import com.jakewharton.rxbinding2.view.RxView
 import com.jakewharton.rxbinding2.widget.RxTextView
+import com.like.LikeButton
+import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.fragment_search.*
+import kotlinx.android.synthetic.main.git_user.*
 import javax.inject.Inject
 
 class SearchFragment @Inject constructor() : BaseFragment(),ISearchView {
@@ -65,13 +69,31 @@ class SearchFragment @Inject constructor() : BaseFragment(),ISearchView {
 
     override fun setList(list: List<User>) {
         adapter.run {
-            setListener(object : OnItemClickListener<User>{
+            setClickListener(object : OnItemClickListener<User>{
                 override fun onItemClick(item: User) {
                     presenter.getUserRepositories(item.login)
                 }
 
             })
-            setItems(list,true)
+
+            setLikeListeneer(object : OnItemLikedListener<User>{
+                override fun liked(p0: LikeButton?) {}
+
+                override fun unLiked(p0: LikeButton?) {}
+
+                override fun like(item: User) {
+                    if (!item.saved){
+                        presenter.saveUser(item)
+                        item.saved = true
+                    }
+                    else presenter.deleteUser(item)
+                }
+
+
+            })
+
+
+            setList(list,true)
         }
         git_rv.adapter = adapter
         git_rv.layoutManager = LinearLayoutManager(context)

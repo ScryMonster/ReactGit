@@ -10,6 +10,7 @@ class ComponentManager(private val context: Context) {
     private var searchActComponent: SearchActivityComponent? = null
     private var searchFragmentComponent: SearchFragmentComponent? = null
     private var detailcomponent: Detailcomponent? = null
+    private var favouriteComponent: FavouriteComponent? = null
 
 
     fun addAppComponent(): AppComponent {
@@ -63,4 +64,17 @@ class ComponentManager(private val context: Context) {
     fun removeDetailComponent(){
         detailcomponent = null
     }
+
+    fun addFavouriteComponent() : FavouriteComponent{
+        if (favouriteComponent == null){
+            favouriteComponent = appComponent!!
+                    .addFavouriteComponent()
+                    .build()
+        }
+        return favouriteComponent!!
+    }
+    fun removeFavouriteComponent(){
+        favouriteComponent = null
+    }
+
 }

@@ -1,25 +1,22 @@
 package com.example.fox.reactgit.arch.adapters
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.fox.reactgit.R
 import com.example.fox.reactgit.arch.ui.base.rv.BaseRVAdapter
 import com.example.fox.reactgit.arch.ui.base.rv.BaseRecyclerViewHolder
-import com.example.fox.reactgit.arch.ui.base.rv.OnItemClickListener
 import com.example.fox.reactgit.arch.ui.base.rv.OnItemLikedListener
-import com.example.fox.reactgit.dto.Repository
-import com.example.fox.reactgit.di.scopes.SearchScope as Search
+import com.example.fox.reactgit.di.scopes.FavouriteScope as Favourite
 import com.example.fox.reactgit.dto.User
 import com.example.fox.reactgit.utils.inflate
 import com.example.fox.reactgit.utils.loadUrl
-import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.git_user.view.*
 import javax.inject.Inject
 
-@Search
-class SearchRvAdapter @Inject constructor()
-    : BaseRVAdapter<User, SearchRvAdapter.GithubUserViewHolder>() {
+
+@Favourite
+class FavouriteRVAdapter @Inject constructor()
+    : BaseRVAdapter<User, FavouriteRVAdapter.GithubUserViewHolder>() {
 
 
     protected lateinit var likeListener:OnItemLikedListener<User>

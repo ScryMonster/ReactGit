@@ -11,4 +11,10 @@
     <string name="nav_header_subtitle">android.studio@android.com</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
+
+    <string name="internet_connection_warning">Please enable Internet connection to use this app</string>
+    <string name="wifi_connection_warning">Please enable Internet connection to use this app</string>
+
+    <string name="db_user_saved">User saved!</string>
+    <string name="db_user_deleted">User deleted!</string>
 </resources>

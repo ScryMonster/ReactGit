@@ -4,9 +4,15 @@
     <item
         android:title="@string/menu_search"
         android:id="@+id/search_item"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         app:showAsAction="always"
         android:icon="@drawable/action_search"/>
+
+    <item
+        android:title=""
+        android:id="@+id/empty"
+        android:orderInCategory="2"
+        app:showAsAction="always"/>
 
     <item
         android:title="@string/menu_favourite"

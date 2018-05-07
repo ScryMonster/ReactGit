@@ -19,7 +19,7 @@ abstract class BaseFragment : Fragment(),IBaseView{
         (activity?.application as ReactGit).manager
     }
     private lateinit var progress: RotateLoading
-    protected var saved = false
+    private var saved = false
 
 
 
@@ -79,5 +79,13 @@ abstract class BaseFragment : Fragment(),IBaseView{
 
     override fun errorMessage(message: String) {
         message.showInSnackBarInError(view!!)
+    }
+
+    override fun infoMessage(message: Int) {
+       resources.getString(message).showInSnackBarIn(view!!)
+    }
+
+    override fun errorMessage(message: Int) {
+        resources.getString(message).showInSnackBarIn(view!!)
     }
 }

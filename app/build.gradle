@@ -75,6 +75,7 @@ dependencies {
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.victor:lib:1.0.4'
     implementation libs.gson
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
     //testing
     testImplementation libs.junit

@@ -27,6 +27,8 @@ ext.versions = [
         retrofit               : '2.3.0',
         retrofitIntercaptor    : '3.8.0',
 
+        likeButtonVersion             : '0.2.3'
+
 ]
 
 ext.libs = [
@@ -66,5 +68,9 @@ ext.libs = [
         retrofit           : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         retrofitRX         : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
         retrofitGson       : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
-        retrofitInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.retrofitIntercaptor"
+        retrofitInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.retrofitIntercaptor",
+
+
+        //Help libs
+        likeButton          :"com.github.jd-alexander:LikeButton:$versions.likeButtonVersion",
 ]

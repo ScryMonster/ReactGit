@@ -10,8 +10,6 @@ import com.example.fox.reactgit.arch.ui.search.view.SearchFragment
 import com.example.fox.reactgit.utils.Constants.FragmentNames.SEARCH_FRAGMENT
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
-import android.net.NetworkInfo
-import android.content.Context.CONNECTIVITY_SERVICE
 import android.net.ConnectivityManager
 import android.support.v4.app.Fragment
 import com.example.fox.reactgit.arch.ui.detail.view.DetailFragment
@@ -23,7 +21,7 @@ import com.example.fox.reactgit.utils.Constants.FragmentNames.DETAIL_FRAGMENT
 class SearchActivity : AppCompatActivity(), ISearchActView {
 
     private var saved = false
-    private val networkInfoe by lazy {
+    private val networkInfo by lazy {
         (getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager).activeNetworkInfo
     }
 
@@ -81,27 +79,24 @@ class SearchActivity : AppCompatActivity(), ISearchActView {
         (application as ReactGit).manager.removeSearchActComponent()
     }
 
-    override fun errorMessage(message: String) {
-        message.showInSnackBarInError(root)
-    }
 
     override fun init() {
         listenBottomClicks()
         supportFragmentManager.addFragment(SearchFragment(), R.id.container, SEARCH_FRAGMENT)
         when(checkInternetConnection()){
-            false -> {"Please enable Internet connection to use this app".showInSnackBarIn(root)}
+            false -> {resources.getString(R.string.internet_connection_warning).showInSnackBarIn(root)}
+            true ->{
+                if (checkWiFiConnection()){}
+                else resources.getString(R.string.wifi_connection_warning).showInSnackBarIn(root)
+            }
         }
     }
 
-    override fun infoMessage(message: String) {
-        message.showInSnackBarIn(root)
 
-    }
-
-    override fun checkInternetConnection() = networkInfoe.isConnected
+    override fun checkInternetConnection() = networkInfo.isConnected
 
 
-    private fun checkWiFiConnection() = networkInfoe != null && ConnectivityManager.TYPE_WIFI == networkInfoe.type && networkInfoe.isConnected
+    private fun checkWiFiConnection() = networkInfo != null && ConnectivityManager.TYPE_WIFI == networkInfo.type && networkInfo.isConnected
 
 
     private fun listenBottomClicks() {
@@ -124,5 +119,16 @@ class SearchActivity : AppCompatActivity(), ISearchActView {
         val fragment = supportFragmentManager.findFragmentById(R.id.container)
         return fragment.javaClass.name == clazz.name
     }
+
+
+
+    override fun infoMessage(message: String) { message.showInSnackBarIn(root) }
+
+    override fun errorMessage(message: String) { message.showInSnackBarInError(root) }
+
+    override fun infoMessage(message: Int) { resources.getString(message).showInSnackBarIn(root) }
+
+    override fun errorMessage(message: Int) { resources.getString(message).showInSnackBarIn(root) }
+
 
 }
