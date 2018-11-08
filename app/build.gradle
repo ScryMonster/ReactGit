@@ -23,7 +23,8 @@ android {
     buildTypes {
 
         all {
-            buildConfigField 'String', 'SHARED_PREF_KEY', '\"APP_PREF\"'
+            buildConfigField 'String', 'SHARED_PREF_BASE_KEY', '\"APP_PREF\"'
+            buildConfigField 'String', 'SHARED_PREF_CREDENTIALS_KEY', '\"APP_CREDENTIALS\"'
             buildConfigField 'String', 'GITHUB_API_BASE_URL', '\"https://api.github.com/\"'
         }
 
@@ -45,6 +46,7 @@ dependencies {
 
     //Kotlin
     implementation libs.kotlin
+    implementation libs.coroutines
     //Rx
     implementation libs.rxJava
     implementation libs.rxAndroid
@@ -70,12 +72,16 @@ dependencies {
     implementation libs.retrofitRX
     implementation libs.retrofitGson
     implementation libs.retrofitInterceptor
+    implementation libs.retrofitCoroutines
 
 
     implementation 'com.android.support:multidex:1.0.3'
     implementation 'com.victor:lib:1.0.4'
     implementation libs.gson
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
+
+    implementation libs.koin
+    implementation libs.koinScope
 
     //testing
     testImplementation libs.junit
@@ -86,6 +92,7 @@ dependencies {
 androidExtensions {
     experimental = true
 }
+
 
 kapt {
     generateStubs = true

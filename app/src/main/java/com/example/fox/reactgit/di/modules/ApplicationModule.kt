@@ -17,7 +17,7 @@ class ApplicationModule(private val app: Context){
 
     @Provides
     @Application
-    fun provideSharePreferences() = app.getSharedPreferences(BuildConfig.SHARED_PREF_KEY, Context.MODE_PRIVATE)
+    fun provideSharePreferences() = app.getSharedPreferences(BuildConfig.SHARED_PREF_BASE_KEY, Context.MODE_PRIVATE)
 
 
 

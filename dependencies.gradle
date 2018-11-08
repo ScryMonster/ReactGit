@@ -3,6 +3,8 @@ ext.versions = [
         compileSdkVersion      : 27,
         targetSdkVersion       : 27,
 
+        coroutineVersion       : '0.24.0',
+
         buildToolsVersion      : '27.0.3',
         supportDesignVersion   : '27.0.1',
         constraintLayoutVersion: '1.1.0-beta4',
@@ -26,10 +28,13 @@ ext.versions = [
 
         retrofit               : '2.3.0',
         retrofitIntercaptor    : '3.8.0',
+        retrofitCoroutinesVersion : "1.0.0",
 
-        likeButtonVersion             : '0.2.3'
-
+        likeButtonVersion      : '0.2.3',
+        koinVersion            : '1.0.0'
 ]
+
+
 
 ext.libs = [
         supportDesign      : "com.android.support:design:$versions.supportDesignVersion",
@@ -38,6 +43,7 @@ ext.libs = [
 
         //Kotlin
         kotlin             : "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+        coroutines         : "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.coroutineVersion",
 
         //Dagger
         dagger             : "com.google.dagger:dagger:$versions.daggerVersion",
@@ -69,8 +75,14 @@ ext.libs = [
         retrofitRX         : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
         retrofitGson       : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
         retrofitInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.retrofitIntercaptor",
+        retrofitCoroutines : "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:$versions.retrofitCoroutinesVersion",
 
 
         //Help libs
         likeButton          :"com.github.jd-alexander:LikeButton:$versions.likeButtonVersion",
+
+        koin                : "org.koin:koin-android:$versions.koinVersion",
+        koinScope           : "org.koin:koin-android-scope:$versions.koinVersion"
+
+
 ]
