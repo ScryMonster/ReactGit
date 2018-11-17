@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.example.fox.reactgit.R
-import com.example.fox.reactgit.arch.adapters.FavouriteRVAdapter
+import com.example.fox.reactgit.arch.adapters.FavouriteAdapter
 import com.example.fox.reactgit.arch.ui.base.BaseFragment
-import com.example.fox.reactgit.arch.ui.base.rv.OnItemClickListener
+import com.example.fox.reactgit.arch.ui.base.rv.OnItemClickedListener
 import com.example.fox.reactgit.arch.ui.base.rv.OnItemLikedListener
 import com.example.fox.reactgit.arch.ui.favourite.presenter.FavouritePresenter
 import com.example.fox.reactgit.arch.ui.search.SearchActivity
@@ -20,7 +20,7 @@ import javax.inject.Inject
 class FavouritesFragment @Inject constructor() : BaseFragment(),IFavouriteView {
 
     @Inject lateinit var presenter: FavouritePresenter
-    @Inject lateinit var adapter:FavouriteRVAdapter
+    @Inject lateinit var adapter:FavouriteAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,7 +52,7 @@ class FavouritesFragment @Inject constructor() : BaseFragment(),IFavouriteView {
 
             })
 
-            setClickListener(object :OnItemClickListener<User>{
+            setClickListener(object :OnItemClickedListener<User>{
                 override fun onItemClick(item: User) {
                     presenter.getUserRepositories(item.login)
                 }

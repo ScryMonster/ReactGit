@@ -3,11 +3,14 @@ package com.example.fox.reactgit.di
 import android.content.Context
 import com.example.fox.reactgit.BuildConfig
 import com.example.fox.reactgit.arch.domain.service.GitHubClientService
+import com.example.fox.reactgit.arch.ui.base.navigation.RootRouter
+import com.example.fox.reactgit.arch.ui.search.RootPresenter
+import com.example.fox.reactgit.arch.ui.search.SearchActivityPresenter
 import com.example.fox.reactgit.db.dao.UserDao
 import com.example.fox.reactgit.db.db.UserDatabase
-import com.example.fox.reactgit.utils.enums.RoomTables
-import com.example.fox.reactgit.utils.enums.SharedPreferencesTypes.*
-import com.example.fox.reactgit.utils.enums.RoomTables.*
+import com.example.fox.reactgit.utils.enums.KoinScopes.*
+import com.example.fox.reactgit.utils.enums.RoomTables.UserTable
+import com.example.fox.reactgit.utils.enums.SharedPreferencesTypes.Base
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
@@ -19,7 +22,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class KoinModulesHandler(context: Context) {
+class KoinModulesHandler(context: Context){
 
     val modules = arrayListOf<Module>().apply {
         add(rootModule)
@@ -64,6 +67,15 @@ class KoinModulesHandler(context: Context) {
     val apiModule = module {
         single { (retrofit:Retrofit) -> retrofit.create(GitHubClientService::class.java)}
 
+    }
+
+    val activityModile = module("RootActivity") {
+        scope(RootActivity.value){
+            RootPresenter(get())
+        }
+        scope(RootActivity.value){
+            RootRouter(get())
+        }
     }
 
 

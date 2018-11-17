@@ -6,86 +6,81 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import com.example.fox.reactgit.R
 import com.example.fox.reactgit.application.ReactGit
-import com.example.fox.reactgit.utils.inflate
-import com.example.fox.reactgit.utils.showInSnackBarIn
-import com.example.fox.reactgit.utils.showInSnackBarInError
-import com.victor.loading.rotate.RotateLoading
+import com.example.fox.reactgit.arch.ui.search.RootActivity
+import com.example.fox.reactgit.utils.ext.inflate
+import com.example.fox.reactgit.utils.ext.showErrorInSnackBar
+import com.example.fox.reactgit.utils.ext.showInfoInSnackBar
 
-abstract class BaseFragment : Fragment(),IBaseView{
+import org.koin.android.ext.android.getKoin
+import org.koin.core.KoinContext
+import org.koin.core.scope.Scope
+
+abstract class BaseFragment : Fragment(),IBaseView,IKoinView{
+
+    abstract val layoutId : Int
+    abstract override val scopeName: String
+
+
+    private lateinit var session: Scope
+
+    private var saved = false
 
     protected val manager by lazy {
         (activity?.application as ReactGit).manager
     }
-    private lateinit var progress: RotateLoading
-    private var saved = false
+    protected val parent get() = activity as RootActivity?
+    override val koin: KoinContext = getKoin()
 
-
-
-    abstract fun setView(): Int
-
-    abstract override fun buildGraph()
-
-    abstract override fun destroyGraph()
 
     abstract override fun init()
 
 
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        val view = container?.inflate(setView())
-        progress = view?.findViewById(R.id.rotateLoading)!!
-        return view
+    override fun buildKoinScope() {
+        session = koin.createScope(scopeName)
     }
 
-    override fun makeBackgroundVisibleWhileProgrees(flag: Boolean) {
-        fun switchOffInteractionWithUi() {
-            activity?.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+    override fun destroyKoinScope() {
+        session.close()
+    }
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =  container?.inflate(layoutId)
+
+    override fun switchOffUiInteraction(flag: Boolean) {
+
+        fun blockScreen(){
+            parent?.window?.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
                     WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
         }
-        fun switchOnInteractionWWithUI(){
-            activity?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        fun unBlockScreen(){
+            parent?.window?.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         }
-
-        if (flag) switchOnInteractionWWithUI()
-        else switchOffInteractionWithUi()
+        if (flag) blockScreen()
+        else unBlockScreen()
     }
 
 
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (!saved) destroyGraph()
-    }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         saved = true
     }
 
-    override fun showProgress(tag: Any?) {
-        progress.start()
-    }
-
-    override fun hideProgress(tag: Any?) {
-        progress.stop()
-    }
 
     override fun infoMessage(message: String) {
-        message.showInSnackBarIn(view!!)
+        message.showInfoInSnackBar(view!!)
     }
 
     override fun errorMessage(message: String) {
-        message.showInSnackBarInError(view!!)
+        message.showErrorInSnackBar(view!!)
     }
 
     override fun infoMessage(message: Int) {
-       resources.getString(message).showInSnackBarIn(view!!)
+       resources.getString(message).showInfoInSnackBar(view!!)
     }
 
     override fun errorMessage(message: Int) {
-        resources.getString(message).showInSnackBarIn(view!!)
+        resources.getString(message).showErrorInSnackBar(view!!)
     }
+
 }

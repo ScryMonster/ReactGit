@@ -5,8 +5,8 @@ import com.example.fox.reactgit.arch.domain.search.SearchInteractor
 import com.example.fox.reactgit.arch.ui.base.BasePresenter
 import com.example.fox.reactgit.arch.ui.search.view.ISearchView
 import com.example.fox.reactgit.dto.User
-import com.example.fox.reactgit.utils.applySchedulers
-import com.example.fox.reactgit.utils.showProgress
+import com.example.fox.reactgit.utils.ext.applySchedulers
+import com.example.fox.reactgit.utils.ext.showProgress
 import com.jakewharton.rxbinding2.InitialValueObservable
 import com.example.fox.reactgit.di.scopes.SearchScope as Search
 import javax.inject.Inject
@@ -14,17 +14,17 @@ import javax.inject.Inject
 @Search
 class SearchPresenter @Inject constructor(private val interactor: SearchInteractor) : BasePresenter<ISearchView>(), ISearchPresenter {
     override fun init() {
-        getMvpView()?.init()
+        getView()?.init()
     }
 
     override fun searchGitUser(name: String) {
         interactor.searchGitUser(name)
                 .applySchedulers()
-                .showProgress(getMvpView()!!)
+                .showProgress(getView()!!)
                 .subscribe({ list ->
-                    getMvpView()?.setList(list)
+                    getView()?.setList(list)
                 }, { error ->
-                    getMvpView()?.errorMessage(error.localizedMessage)
+                    getView()?.errorMessage(error.localizedMessage)
                 })
 
     }
@@ -32,11 +32,11 @@ class SearchPresenter @Inject constructor(private val interactor: SearchInteract
     override fun getUserRepositories(login: String) {
         interactor.getUserRepositories(login)
                 .applySchedulers()
-                .showProgress(getMvpView()!!)
+                .showProgress(getView()!!)
                 .subscribe({
-                    getMvpView()?.replacment(it)
+                    getView()?.replacment(it)
                 }, { error ->
-                    getMvpView()?.errorMessage(error.localizedMessage)
+                    getView()?.errorMessage(error.localizedMessage)
                 })
 
     }
@@ -45,9 +45,9 @@ class SearchPresenter @Inject constructor(private val interactor: SearchInteract
         interactor.validateField(name)
                 .applySchedulers()
                 .subscribe({
-                    getMvpView()?.startSearching(it)
+                    getView()?.startSearching(it)
                 }, {
-                    getMvpView()?.errorMessage(it.localizedMessage)
+                    getView()?.errorMessage(it.localizedMessage)
                 })
     }
 
@@ -55,9 +55,9 @@ class SearchPresenter @Inject constructor(private val interactor: SearchInteract
         interactor.saveUser(user)
                 .applySchedulers()
                 .subscribe({
-                    getMvpView()?.infoMessage(R.string.db_user_saved)
+                    getView()?.infoMessage(R.string.db_user_saved)
                 },{
-                    getMvpView()?.errorMessage(it.localizedMessage)
+                    getView()?.errorMessage(it.localizedMessage)
                 })
     }
 
@@ -65,9 +65,9 @@ class SearchPresenter @Inject constructor(private val interactor: SearchInteract
         interactor.deleteUser(user)
                 .applySchedulers()
                 .subscribe({
-                   getMvpView()?.infoMessage(R.string.db_user_deleted)
+                   getView()?.infoMessage(R.string.db_user_deleted)
                 },{
-                    getMvpView()?.errorMessage(it.localizedMessage)
+                    getView()?.errorMessage(it.localizedMessage)
                 })
     }
 }

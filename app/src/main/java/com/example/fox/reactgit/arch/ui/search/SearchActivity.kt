@@ -14,8 +14,9 @@ import android.net.ConnectivityManager
 import android.support.v4.app.Fragment
 import com.example.fox.reactgit.arch.ui.detail.view.DetailFragment
 import com.example.fox.reactgit.dto.Repository
-import com.example.fox.reactgit.utils.*
 import com.example.fox.reactgit.utils.Constants.FragmentNames.DETAIL_FRAGMENT
+import com.example.fox.reactgit.utils.ext.addFragment
+import com.example.fox.reactgit.utils.ext.replaceFragment
 
 
 class SearchActivity : AppCompatActivity(), ISearchActView {
@@ -65,11 +66,8 @@ class SearchActivity : AppCompatActivity(), ISearchActView {
         }
     }
 
-    override fun showProgress(tag: Any?) {}
 
-    override fun hideProgress(tag: Any?) {}
-
-    override fun makeBackgroundVisibleWhileProgrees(flag: Boolean) {}
+    override fun switchOffUiInteraction(flag: Boolean) {}
 
     override fun buildGraph() {
         (application as ReactGit).manager.addSearchActComponent().inject(this)

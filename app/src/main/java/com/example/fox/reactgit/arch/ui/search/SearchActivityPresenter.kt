@@ -7,7 +7,7 @@ import javax.inject.Inject
 @SearchActivity
 class SearchActivityPresenter @Inject constructor() : BasePresenter<ISearchActView>() {
     override fun init() {
-        getMvpView()?.init()
+        getView()?.init()
     }
 
 }

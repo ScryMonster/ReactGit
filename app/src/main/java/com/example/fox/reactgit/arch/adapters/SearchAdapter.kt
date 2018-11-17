@@ -1,25 +1,21 @@
 package com.example.fox.reactgit.arch.adapters
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import com.example.fox.reactgit.R
-import com.example.fox.reactgit.arch.ui.base.rv.BaseRVAdapter
-import com.example.fox.reactgit.arch.ui.base.rv.BaseRecyclerViewHolder
-import com.example.fox.reactgit.arch.ui.base.rv.OnItemClickListener
+import com.example.fox.reactgit.arch.ui.base.rv.BaseAdapter
+import com.example.fox.reactgit.arch.ui.base.rv.BaseViewHolder
 import com.example.fox.reactgit.arch.ui.base.rv.OnItemLikedListener
-import com.example.fox.reactgit.dto.Repository
 import com.example.fox.reactgit.di.scopes.SearchScope as Search
 import com.example.fox.reactgit.dto.User
-import com.example.fox.reactgit.utils.inflate
-import com.example.fox.reactgit.utils.loadUrl
-import com.like.OnLikeListener
+import com.example.fox.reactgit.utils.ext.inflate
+import com.example.fox.reactgit.utils.ext.loadUrl
 import kotlinx.android.synthetic.main.git_user.view.*
 import javax.inject.Inject
 
 @Search
-class SearchRvAdapter @Inject constructor()
-    : BaseRVAdapter<User, SearchRvAdapter.GithubUserViewHolder>() {
+class SearchAdapter @Inject constructor()
+    : BaseAdapter<User, SearchAdapter.GithubUserViewHolder>() {
 
 
     protected lateinit var likeListener:OnItemLikedListener<User>
@@ -40,11 +36,11 @@ class SearchRvAdapter @Inject constructor()
     }
 
     private fun callOnItemClick(user:User){
-        click.onItemClick(user)
+        clickListener.onItemClick(user)
     }
 
 
-    inner class GithubUserViewHolder(view: View) : BaseRecyclerViewHolder<User>(view) {
+    inner class GithubUserViewHolder(view: View) : BaseViewHolder<User>(view) {
 
 
         override fun bind(item: User, position: Int) {

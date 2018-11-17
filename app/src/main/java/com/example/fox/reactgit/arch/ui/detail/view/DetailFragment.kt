@@ -6,7 +6,7 @@ import android.view.View
 import com.example.fox.reactgit.R
 import com.example.fox.reactgit.arch.adapters.RepositoriesAdapter
 import com.example.fox.reactgit.arch.ui.base.BaseFragment
-import com.example.fox.reactgit.arch.ui.base.rv.OnItemClickListener
+import com.example.fox.reactgit.arch.ui.base.rv.OnItemClickedListener
 import com.example.fox.reactgit.arch.ui.detail.presenter.DetailPresenter
 import com.example.fox.reactgit.dto.Repository
 import com.example.fox.reactgit.utils.showInSnackBarIn
@@ -49,7 +49,7 @@ class DetailFragment : BaseFragment(), IDetailView {
         val list = arguments?.getParcelableArrayList<Repository>(DETAIL_EXTRA_KEY)
         adapter.run {
             setList(list!!)
-            setClickListener(object :OnItemClickListener<Repository>{
+            setClickListener(object :OnItemClickedListener<Repository>{
                 override fun onItemClick(item: Repository) {
                     item.fullName.showInSnackBarIn(view!!)
                 }

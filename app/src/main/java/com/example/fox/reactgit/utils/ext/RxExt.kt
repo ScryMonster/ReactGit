@@ -1,4 +1,4 @@
-package com.example.fox.reactgit.utils
+package com.example.fox.reactgit.utils.ext
 
 import com.example.fox.reactgit.arch.ui.base.IBaseView
 import io.reactivex.Observable
@@ -22,9 +22,9 @@ fun <T> Observable<T>.applySchedulers() =
 fun <T> Single<T>.showProgress(view: IBaseView) = this
         .doOnSubscribe {
             view.showProgress(null)
-            view.makeBackgroundVisibleWhileProgrees(false)
+            view.switchOffUiInteraction(false)
         }
         .doFinally {
             view.hideProgress(null)
-            view.makeBackgroundVisibleWhileProgrees(true)
+            view.switchOffUiInteraction(true)
         }!!

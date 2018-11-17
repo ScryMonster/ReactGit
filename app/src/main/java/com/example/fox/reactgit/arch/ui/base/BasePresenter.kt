@@ -2,11 +2,13 @@ package com.example.fox.reactgit.arch.ui.base
 
 import android.view.View
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.experimental.Job
 
 abstract class BasePresenter<T:IBaseView> : IBasePresenter<T>{
 
     private var view : T? = null
     protected val clearedDisposable = CompositeDisposable()
+    val parentJob = Job()
 
 
     override fun attach(view: T) {
@@ -20,11 +22,7 @@ abstract class BasePresenter<T:IBaseView> : IBasePresenter<T>{
 
     abstract override fun init()
 
-    protected fun getMvpView() = view
-
-    fun onShowProgress(tag:Any) = view?.showProgress(tag)
-
-    fun onShowProgress() = view?.showProgress(null)
+    fun getView() = view!!
 
     fun onInfoMessage(message:String) = view?.infoMessage(message)
 

@@ -4,46 +4,46 @@ import com.example.fox.reactgit.arch.domain.favourite.FavouriteInteractor
 import com.example.fox.reactgit.arch.ui.base.BasePresenter
 import com.example.fox.reactgit.arch.ui.favourite.view.IFavouriteView
 import com.example.fox.reactgit.dto.User
-import com.example.fox.reactgit.utils.applySchedulers
-import com.example.fox.reactgit.utils.showProgress
+import com.example.fox.reactgit.utils.ext.applySchedulers
+import com.example.fox.reactgit.utils.ext.showProgress
 import javax.inject.Inject
 import com.example.fox.reactgit.di.scopes.FavouriteScope as Favourite
 
 @Favourite
 class FavouritePresenter @Inject constructor(private val interactor:FavouriteInteractor) : BasePresenter<IFavouriteView>(),IFavouritePresenter {
     override fun init() {
-        getMvpView()?.init()
+        getView()?.init()
     }
 
     override fun deleteUser(user: User) {
         interactor.deleteUser(user)
                 .applySchedulers()
                 .subscribe({
-                    getMvpView()?.infoMessage("Cleared")
+                    getView()?.infoMessage("Cleared")
                 },{
-                    getMvpView()?.errorMessage("Cleared")
+                    getView()?.errorMessage("Cleared")
                 })
     }
 
     override fun loadUsers() {
         interactor.getUsers()
                 .applySchedulers()
-                .showProgress(getMvpView()!!)
+                .showProgress(getView()!!)
                 .subscribe({
-                    getMvpView()?.setList(it)
+                    getView()?.setList(it)
                 },{
-                    getMvpView()?.errorMessage(it.localizedMessage!!)
+                    getView()?.errorMessage(it.localizedMessage!!)
                 })
     }
 
     override fun getUserRepositories(login: String) {
         interactor.getUserRepositories(login)
                 .applySchedulers()
-                .showProgress(getMvpView()!!)
+                .showProgress(getView()!!)
                 .subscribe({
-                    getMvpView()?.replacment(it)
+                    getView()?.replacment(it)
                 }, { error ->
-                    getMvpView()?.errorMessage(error.localizedMessage)
+                    getView()?.errorMessage(error.localizedMessage)
                 })
 
     }
