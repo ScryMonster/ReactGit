@@ -8,7 +8,7 @@ import com.example.fox.reactgit.di.scopes.DetailScope as Detail
 @Detail
 class DetailPresenter @Inject constructor() : IDetailPresenter, BasePresenter<IDetailView>(){
     override fun init() {
-        getView()?.setList()
+        view?.setList()
     }
 
 

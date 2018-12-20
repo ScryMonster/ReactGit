@@ -4,14 +4,14 @@ import android.view.View
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.experimental.Job
 
-abstract class BasePresenter<T:IBaseView> : IBasePresenter<T>{
+abstract class BasePresenter<V:IBaseView> : IBasePresenter<V>{
 
-    private var view : T? = null
+    var view : V? = null
     protected val clearedDisposable = CompositeDisposable()
     val parentJob = Job()
 
 
-    override fun attach(view: T) {
+    override fun attach(view: V) {
         this.view = view
     }
 
@@ -21,8 +21,6 @@ abstract class BasePresenter<T:IBaseView> : IBasePresenter<T>{
     }
 
     abstract override fun init()
-
-    fun getView() = view!!
 
     fun onInfoMessage(message:String) = view?.infoMessage(message)
 

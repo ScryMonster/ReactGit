@@ -28,7 +28,7 @@ ext.versions = [
 
         retrofit               : '2.3.0',
         retrofitIntercaptor    : '3.8.0',
-        retrofitCoroutinesVersion : "1.0.0",
+        retrofitCoroutinesVersion : '1.0.0',
 
         likeButtonVersion      : '0.2.3',
         koinVersion            : '1.0.0'

@@ -9,7 +9,7 @@ import dagger.Subcomponent
  */
 @Search
 @Subcomponent(modules = [])
-interface SearchFragmentComponent {
+interface SearchFragmentComponent:BaseComponent {
 
 
 

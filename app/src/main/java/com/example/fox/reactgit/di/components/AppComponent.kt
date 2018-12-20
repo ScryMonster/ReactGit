@@ -11,7 +11,7 @@ import dagger.Component
 @Component(modules = [ApplicationModule::class,NetworkModule::class,DatabaseModule::class])
 interface AppComponent {
 
-    fun addSearchActivityComponent() : SearchActivityComponent.Builder
+    fun addRootActComponent() : RootActComponent.Builder
     fun addSearchFragmentComponent() : SearchFragmentComponent.Builder
     fun addDetailComponent() : Detailcomponent.Builder
     fun addFavouriteComponent() :FavouriteComponent.Builder

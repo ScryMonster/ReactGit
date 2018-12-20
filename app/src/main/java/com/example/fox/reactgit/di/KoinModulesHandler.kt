@@ -5,7 +5,6 @@ import com.example.fox.reactgit.BuildConfig
 import com.example.fox.reactgit.arch.domain.service.GitHubClientService
 import com.example.fox.reactgit.arch.ui.base.navigation.RootRouter
 import com.example.fox.reactgit.arch.ui.search.RootPresenter
-import com.example.fox.reactgit.arch.ui.search.SearchActivityPresenter
 import com.example.fox.reactgit.db.dao.UserDao
 import com.example.fox.reactgit.db.db.UserDatabase
 import com.example.fox.reactgit.utils.enums.KoinScopes.*

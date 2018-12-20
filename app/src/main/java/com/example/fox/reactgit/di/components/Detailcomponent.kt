@@ -6,7 +6,7 @@ import dagger.Subcomponent
 
 @DetailScope
 @Subcomponent(modules = [])
-interface Detailcomponent {
+interface Detailcomponent : BaseComponent{
 
     @Subcomponent.Builder
     interface Builder{

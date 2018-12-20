@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.DisplayMetrics
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.example.fox.reactgit.arch.ui.base.BasePresenter
+import com.example.fox.reactgit.arch.ui.base.IBaseView
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -51,6 +53,12 @@ infix fun Date.getFormattedDate(timePattern:String) : String{
 }
 
 infix fun ImageView.loadUrl(url:String) = Glide.with(context).load(url).into(this)
+
+fun <T:IBaseView,P:BasePresenter<T>> P.attachWithAction(view:T,action:P.()->Unit = {}){
+    attach(view)
+    init()
+    action()
+}
 
 
 

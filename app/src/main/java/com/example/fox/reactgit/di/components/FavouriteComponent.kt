@@ -6,7 +6,7 @@ import dagger.Subcomponent
 
 @FavouriteScope
 @Subcomponent(modules = [])
-interface FavouriteComponent {
+interface FavouriteComponent :BaseComponent{
 
     @Subcomponent.Builder
     interface Builder{

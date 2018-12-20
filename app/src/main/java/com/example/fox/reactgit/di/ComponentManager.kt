@@ -1,13 +1,14 @@
 package com.example.fox.reactgit.di
 
 import android.content.Context
+import com.example.fox.reactgit.arch.ui.base.navigation.SuppFragmentNavigator
 import com.example.fox.reactgit.di.components.*
 import com.example.fox.reactgit.di.modules.ApplicationModule
 
 class ComponentManager(private val context: Context) {
 
     private var appComponent: AppComponent? = null
-    private var searchActComponent: SearchActivityComponent? = null
+    private var rootActComponent: RootActComponent? = null
     private var searchFragmentComponent: SearchFragmentComponent? = null
     private var detailcomponent: Detailcomponent? = null
     private var favouriteComponent: FavouriteComponent? = null
@@ -25,17 +26,18 @@ class ComponentManager(private val context: Context) {
         return appComponent!!
     }
 
-    fun addSearchActComponent(): SearchActivityComponent {
-        if (searchActComponent == null) {
-            searchActComponent = appComponent!!
-                    .addSearchActivityComponent()
+    fun addRootActComponent(navigator: SuppFragmentNavigator): RootActComponent {
+        if (rootActComponent == null) {
+            rootActComponent = appComponent!!
+                    .addRootActComponent()
+                    .addRootModule(navigator)
                     .build()
         }
-        return searchActComponent!!
+        return rootActComponent!!
     }
 
-    fun removeSearchActComponent() {
-        searchActComponent = null
+    fun removeRootActComponent() {
+        rootActComponent = null
     }
 
 

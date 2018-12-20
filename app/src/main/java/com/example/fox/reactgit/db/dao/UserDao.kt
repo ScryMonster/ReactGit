@@ -30,9 +30,9 @@ interface UserDao {
     infix fun deleteUsers(list:List<User>)
 
     @Query("Select  * From users Where id=:id")
-    infix fun getUserBy(id:String) : Single<User>
+    infix fun getUserBy(id:String) : User
 
     @Query("Select  * From users")
-    fun getUsers() : Single<List<User>>
+    fun getUsers() : List<User>
 
 }

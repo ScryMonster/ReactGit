@@ -9,9 +9,9 @@ import io.reactivex.Single
 import com.jakewharton.rxbinding2.InitialValueObservable as RxObservable
 
 interface ISearchInteractor {
-    fun searchGitUser(name: String) : Single<List<User>>
+    fun searchGitUser(name: String,success: (List<User>)->Unit,errorHandler: (Exception)->Unit)
     fun validateField(name: RxObservable<CharSequence>) : Observable<String>
-    fun getUserRepositories(login:String) : Single<List<Repository>>
-    fun saveUser(user: User) : Single<Boolean>
-    fun deleteUser(user: User) : Single<Boolean>
+    fun getUserRepositories(login:String,success: (List<Repository>)->Unit,errorHandler: (Exception)->Unit)
+    fun saveUser(user: User,success: (String)->Unit,errorHandler: (Exception)->Unit)
+    fun deleteUser(user: User,success: (String)->Unit,errorHandler: (Exception)->Unit)
 }

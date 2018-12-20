@@ -2,10 +2,13 @@ package com.example.fox.reactgit.di.modules
 
 import com.example.fox.reactgit.BuildConfig
 import com.example.fox.reactgit.arch.domain.service.GitHubClientService
+import com.example.fox.reactgit.di.qualifires.CoroutinesCallAdapter
+import com.example.fox.reactgit.di.qualifires.RxCallAdapter
 import com.example.fox.reactgit.di.scopes.ApplicationScope as Application
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
 import retrofit2.CallAdapter
@@ -34,7 +37,7 @@ class NetworkModule {
     @Application
     @Provides
     fun provideRetrofit(converterFactory: Converter.Factory,
-                        callAdapterFactory: CallAdapter.Factory): Retrofit =
+                        @CoroutinesCallAdapter callAdapterFactory: CallAdapter.Factory): Retrofit =
             Retrofit.Builder()
                     .baseUrl(BuildConfig.GITHUB_API_BASE_URL)
                     .addConverterFactory(converterFactory)
@@ -46,8 +49,15 @@ class NetworkModule {
     fun provideConverterFactory(gson: Gson): Converter.Factory = GsonConverterFactory.create(gson)
 
     @Application
+    @RxCallAdapter
     @Provides
-    fun provideCallAdapterFactory(): CallAdapter.Factory = RxJava2CallAdapterFactory.create()
+    fun provideRxCallAdapter(): CallAdapter.Factory = RxJava2CallAdapterFactory.create()
+
+    @Application
+    @CoroutinesCallAdapter
+    @Provides
+    fun provideCoroutineCallAdapter():CallAdapter.Factory = CoroutineCallAdapterFactory()
+
 
 
     @Application

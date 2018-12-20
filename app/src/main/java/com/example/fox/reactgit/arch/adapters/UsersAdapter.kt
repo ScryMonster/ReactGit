@@ -5,21 +5,21 @@ import android.view.ViewGroup
 import com.example.fox.reactgit.R
 import com.example.fox.reactgit.arch.ui.base.rv.BaseAdapter
 import com.example.fox.reactgit.arch.ui.base.rv.BaseViewHolder
-import com.example.fox.reactgit.arch.ui.base.rv.OnItemLikedListener
 import com.example.fox.reactgit.arch.ui.base.rv.OnUserLikedListener
-import com.example.fox.reactgit.di.scopes.FavouriteScope as Favourite
+import com.example.fox.reactgit.di.scopes.ApplicationScope
+import com.example.fox.reactgit.di.scopes.SearchScope as Search
 import com.example.fox.reactgit.dto.User
 import com.example.fox.reactgit.utils.ext.inflate
 import com.example.fox.reactgit.utils.ext.loadUrl
 import kotlinx.android.synthetic.main.git_user.view.*
 import javax.inject.Inject
 
-
-@Favourite
-class FavouriteAdapter @Inject constructor()
-    : BaseAdapter<User, FavouriteAdapter.GithubUserViewHolder>() {
+@ApplicationScope
+class UsersAdapter @Inject constructor()
+    : BaseAdapter<User, UsersAdapter.GithubUserViewHolder>() {
 
     override val layoutId: Int = R.layout.git_user
+
 
     lateinit var likeListener: OnUserLikedListener
 
@@ -29,14 +29,13 @@ class FavouriteAdapter @Inject constructor()
     override fun getItemCount() = list.size
 
 
-
     override fun onBindViewHolder(holder: GithubUserViewHolder?, position: Int) {
         val user = list[position]
-        holder?.bind(user,position)
+        holder?.bind(user, position)
     }
 
-    private fun callOnItemClick(user:User,position: Int){
-        clickListener.onItemClick(user,position)
+    private fun callOnItemClick(user: User, position: Int) {
+        clickListener.onItemClick(user, position)
     }
 
 
@@ -44,17 +43,17 @@ class FavouriteAdapter @Inject constructor()
 
 
         override fun bind(item: User, position: Int) {
-            item.run {
-                itemView.organisationImage loadUrl avatarUrl
-                itemView.organisationName.text = login
-                itemView.organisationInfo.text = score
-                itemView.organisationUrl.text = url
-            }
-            itemView.setOnClickListener {
-                callOnItemClick(item,position)
-            }
-            itemView.likeButton.setOnClickListener{
-                likeListener.like(list[position])
+            itemView.apply {
+                organisationImage loadUrl item.avatarUrl
+                organisationName.text = item.login
+                organisationInfo.text = item.score
+                organisationUrl.text = item.url
+                setOnClickListener {
+                    callOnItemClick(item, position)
+                }
+                likeButton.setOnClickListener {
+                    likeListener.like(list[position])
+                }
             }
         }
     }

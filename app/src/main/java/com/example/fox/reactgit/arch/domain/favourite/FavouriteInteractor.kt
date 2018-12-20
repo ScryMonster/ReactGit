@@ -11,14 +11,21 @@ import javax.inject.Inject
 @Favourite
 class FavouriteInteractor @Inject constructor(private val gitRepository: GithubRepository,
                                               private val storageRepository: StorageRepository) : IFavouriteInteractor {
-    override fun deleteUser(user: User): Single<Boolean> = Single.fromCallable {
-        storageRepository.deleteUser(user)
+    override fun deleteUser(user: User,
+                            success: (String) -> Unit,
+                            errorHandler: (Exception) -> Unit) {
+        storageRepository.deleteUser(user,success,errorHandler)
     }
-            .map { true }
+    override fun getUsers(success: (List<User>) -> Unit,
+                          errorHandler: (Exception) -> Unit) {
+        storageRepository.getUsers(success, errorHandler)
+    }
 
-    override fun getUsers(): Single<List<User>> = storageRepository.getUsers()
-
-    override fun getUserRepositories(login: String): Single<List<Repository>> = gitRepository.getUserRepositories(login)
+    override fun getUserRepositories(login: String,
+                                     success: (List<Repository>) -> Unit,
+                                     errorHandler: (Exception) -> Unit) {
+        gitRepository.getUserRepositories(login,success,errorHandler)
+    }
 
 
 

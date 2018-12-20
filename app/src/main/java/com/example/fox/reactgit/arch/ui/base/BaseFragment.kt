@@ -1,50 +1,38 @@
 package com.example.fox.reactgit.arch.ui.base
 
 import android.os.Bundle
+import android.support.annotation.IdRes
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import com.example.fox.reactgit.application.ReactGit
+import com.example.fox.reactgit.arch.ui.base.baseDI.IDaggerView
 import com.example.fox.reactgit.arch.ui.search.RootActivity
 import com.example.fox.reactgit.utils.ext.inflate
 import com.example.fox.reactgit.utils.ext.showErrorInSnackBar
 import com.example.fox.reactgit.utils.ext.showInfoInSnackBar
 
-import org.koin.android.ext.android.getKoin
-import org.koin.core.KoinContext
-import org.koin.core.scope.Scope
-
-abstract class BaseFragment : Fragment(),IBaseView,IKoinView{
+abstract class BaseFragment : Fragment(),IBaseView, IDaggerView {
 
     abstract val layoutId : Int
-    abstract override val scopeName: String
-
-
-    private lateinit var session: Scope
+    @IdRes get
 
     private var saved = false
 
-    protected val manager by lazy {
+    val manager by lazy {
         (activity?.application as ReactGit).manager
     }
     protected val parent get() = activity as RootActivity?
-    override val koin: KoinContext = getKoin()
 
 
     abstract override fun init()
 
 
-    override fun buildKoinScope() {
-        session = koin.createScope(scopeName)
-    }
-
-    override fun destroyKoinScope() {
-        session.close()
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =  container?.inflate(layoutId)
+
+
 
     override fun switchOffUiInteraction(flag: Boolean) {
 

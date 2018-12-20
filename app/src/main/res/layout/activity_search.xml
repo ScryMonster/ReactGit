@@ -6,8 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".arch.ui.search.SearchActivity">
+    android:layout_height="match_parent">
 
     <FrameLayout
         android:id="@+id/container"

@@ -15,7 +15,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/organisation_img"
+            android:id="@+id/organisationImage"
             android:layout_width="70dp"
             android:layout_height="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,19 +26,18 @@
 
 
         <TextView
-            android:id="@+id/organisation_name"
+            android:id="@+id/organisationName"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.051"
-            app:layout_constraintStart_toEndOf="@+id/organisation_img"
+            app:layout_constraintStart_toEndOf="@+id/organisationImage"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Facebook" />
 
         <TextView
-            android:id="@+id/organisation_info"
+            android:id="@+id/organisationInfo"
             android:layout_width="wrap_content"
             android:layout_height="22dp"
             android:layout_marginEnd="8dp"
@@ -60,16 +59,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.049"
-            app:layout_constraintStart_toEndOf="@+id/organisation_img" />
+            app:layout_constraintStart_toEndOf="@+id/organisationImage" />
 
         <TextView
-            android:id="@+id/organisation_url"
+            android:id="@+id/organisationUrl"
             android:layout_width="wrap_content"
-
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.049"
-            app:layout_constraintStart_toEndOf="@+id/organisation_img"
+            app:layout_constraintStart_toEndOf="@+id/organisationImage"
             app:layout_constraintTop_toBottomOf="@+id/textView"
             tools:text="Url" />
 

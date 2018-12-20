@@ -9,7 +9,9 @@ import com.example.fox.reactgit.arch.ui.base.BaseFragment
 import com.example.fox.reactgit.arch.ui.base.rv.OnItemClickedListener
 import com.example.fox.reactgit.arch.ui.detail.presenter.DetailPresenter
 import com.example.fox.reactgit.dto.Repository
-import com.example.fox.reactgit.utils.showInSnackBarIn
+import com.example.fox.reactgit.utils.ext.attachWithAction
+import com.example.fox.reactgit.utils.ext.buildWithAction
+import com.example.fox.reactgit.utils.ext.showInfoInSnackBar
 import kotlinx.android.synthetic.main.fragment_detail.*
 import javax.inject.Inject
 
@@ -18,20 +20,20 @@ class DetailFragment : BaseFragment(), IDetailView {
     @Inject lateinit var presenter:DetailPresenter
     @Inject lateinit var adapter:RepositoriesAdapter
 
-    override fun setView(): Int = R.layout.fragment_detail
+
+    override val layoutId: Int = R.layout.fragment_detail
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         buildGraph()
-        presenter.run {
-            attach(this@DetailFragment)
-            init()
-        }
+        presenter.attachWithAction(this)
 
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        destroyGraph()
         presenter.detach()
     }
 
@@ -43,31 +45,28 @@ class DetailFragment : BaseFragment(), IDetailView {
         manager.removeDetailComponent()
     }
 
-    override fun init() {}
+    override fun init() {
+        initRV()
+        setList()
+    }
 
     override fun setList() {
         val list = arguments?.getParcelableArrayList<Repository>(DETAIL_EXTRA_KEY)
-        adapter.run {
-            setList(list!!)
-            setClickListener(object :OnItemClickedListener<Repository>{
-                override fun onItemClick(item: Repository) {
-                    item.fullName.showInSnackBarIn(view!!)
-                }
-            })
-        }
-        repositories_rv.layoutManager = LinearLayoutManager(context)
-        repositories_rv.adapter = adapter
+        adapter.setList(list!!)
+    }
 
+
+    private fun initRV() {
+        repositoriesRV.buildWithAction(adapter) { user ->
+            user.fullName.showInfoInSnackBar(view!!)
+        }
     }
 
     companion object {
-        fun newInstance(repositoreis: ArrayList<Repository>) : DetailFragment {
-            val args = Bundle()
-            args.putParcelableArrayList(DETAIL_EXTRA_KEY,repositoreis)
-
-            val detailFragment = DetailFragment()
-            detailFragment.arguments = args
-            return detailFragment
+        fun newInstance(repositoreis: ArrayList<Repository>)  = DetailFragment().apply {
+            arguments = Bundle().apply {
+                putParcelableArrayList(DETAIL_EXTRA_KEY,repositoreis)
+            }
         }
 
         const val DETAIL_EXTRA_KEY = "detail_extra_key"
